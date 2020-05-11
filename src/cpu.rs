@@ -604,21 +604,27 @@ impl<T: Memory> CPU<T> {
             }
             Op::BCC => {
                 if !self.reg.get_flag(Fl::C) {
-                    // TODO: Add clock delay for page jump
+                    self.cycles_left_for_op +=
+                        if (self.reg.pc & 0xFF00) != ((self.reg.pc + src as u16) & 0xFF00)
+                        { 2 } else { 1 };
                     let (result, _carry) = self.reg.pc.overflowing_add(src as u16);
                     self.reg.pc = result;
                 }
             }
             Op::BCS => {
                 if self.reg.get_flag(Fl::C) {
-                    // TODO: Add clock delay for page jump
+                    self.cycles_left_for_op +=
+                        if (self.reg.pc & 0xFF00) != ((self.reg.pc + src as u16) & 0xFF00)
+                        { 2 } else { 1 };
                     let (result, _carry) = self.reg.pc.overflowing_add(src as u16);
                     self.reg.pc = result;
                 }
             }
             Op::BEQ => {
                 if self.reg.get_flag(Fl::Z) {
-                    // TODO: Add clock delay for page jump
+                    self.cycles_left_for_op +=
+                        if (self.reg.pc & 0xFF00) != ((self.reg.pc + src as u16) & 0xFF00)
+                        { 2 } else { 1 };
                     let (result, _carry) = self.reg.pc.overflowing_add(src as u16);
                     self.reg.pc = result;
                 }
@@ -630,21 +636,27 @@ impl<T: Memory> CPU<T> {
             }
             Op::BMI => {
                 if self.reg.get_flag(Fl::S) {
-                    // TODO: Add clock delay for page jump
+                    self.cycles_left_for_op +=
+                        if (self.reg.pc & 0xFF00) != ((self.reg.pc + src as u16) & 0xFF00)
+                        { 2 } else { 1 };
                     let (result, _carry) = self.reg.pc.overflowing_add(src as u16);
                     self.reg.pc = result;
                 }
             }
             Op::BNE => {
                 if !self.reg.get_flag(Fl::Z) {
-                    // TODO: Add clock delay for page jump
+                    self.cycles_left_for_op +=
+                        if (self.reg.pc & 0xFF00) != ((self.reg.pc + src as u16) & 0xFF00)
+                        { 2 } else { 1 };
                     let (result, _carry) = self.reg.pc.overflowing_add(src as u16);
                     self.reg.pc = result;
                 }
             }
             Op::BPL => {
                 if !self.reg.get_flag(Fl::S) {
-                    // TODO: Add clock delay for page jump
+                    self.cycles_left_for_op +=
+                        if (self.reg.pc & 0xFF00) != ((self.reg.pc + src as u16) & 0xFF00)
+                        { 2 } else { 1 };
                     let (result, _carry) = self.reg.pc.overflowing_add(src as u16);
                     self.reg.pc = result;
                 }
@@ -661,14 +673,18 @@ impl<T: Memory> CPU<T> {
             }
             Op::BVC => {
                 if !self.reg.get_flag(Fl::V) {
-                    // TODO: Add clock delay for page jump
+                    self.cycles_left_for_op +=
+                        if (self.reg.pc & 0xFF00) != ((self.reg.pc + src as u16) & 0xFF00)
+                        { 2 } else { 1 };
                     let (result, _carry) = self.reg.pc.overflowing_add(src as u16);
                     self.reg.pc = result;
                 }
             }
             Op::BVS => {
                 if self.reg.get_flag(Fl::V) {
-                    // TODO: Add clock delay for page jump
+                    self.cycles_left_for_op +=
+                        if (self.reg.pc & 0xFF00) != ((self.reg.pc + src as u16) & 0xFF00)
+                        { 2 } else { 1 };
                     let (result, _carry) = self.reg.pc.overflowing_add(src as u16);
                     self.reg.pc = result;
                 }

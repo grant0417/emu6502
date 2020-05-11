@@ -4,9 +4,9 @@ Current Features
  * Reads roms from hex and binary files
  * Steppable execution
  * Full introspection of programs
+ * Cycle accurate
 
 Current Limitations
- * Each op takes base number of cycle (not accounting for pageing)
  * Decimal mode is not implemented (similar to NES) 
  * Interrupts are not fully implemented (hardware)
  
