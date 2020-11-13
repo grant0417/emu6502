@@ -1,5 +1,7 @@
 # EMU6502
 
+[Link to Assembler](https://github.com/grant0417/assembler6502)
+
 Current Features
  * Reads roms from hex and binary files
  * Steppable execution
